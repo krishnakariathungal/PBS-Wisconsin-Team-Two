@@ -218,6 +218,24 @@
   border-radius: 6px;
 }
 
+.log-box .log-entry.log-click {
+  background: rgba(0, 0, 0, 0.06);
+  color: #1f1f1f;
+  border-left: 3px solid rgba(0, 0, 0, 0.6);
+}
+
+.log-box .log-entry.log-static-click {
+  background: rgba(30, 144, 255, 0.06);
+  color: #1f3f8a;
+  border-left: 3px solid rgba(30, 144, 255, 0.6);
+}
+
+.log-box .log-entry.log-loud-click {
+  background: rgba(255, 20, 147, 0.06);
+  color: #7a1f4f;
+  border-left: 3px solid rgba(255, 20, 147, 0.6);
+}
+
 .log-box .log-entry.log-silence {
   background: rgba(255, 0, 0, 0.06);
   color: #7a1f1f;
@@ -230,17 +248,17 @@
   border-left: 3px solid rgba(255, 165, 0, 0.6);
 }
 
+.log-box .log-entry.log-background-noise {
+  background: rgba(0, 255, 255, 0.06);
+  color: #0a3f43;
+  border-left: 3px solid rgba(0, 255, 255, 0.6);
+}
+
 /* Scrollbar styling for WebKit browsers (Chrome, Safari, Edge) */
 .waveform-scroll::-webkit-scrollbar,
 .log-box::-webkit-scrollbar {
   height: 10px;
   /* horizontal scroll for waveform */
-
-  .log-box .log-entry.log-click {
-    background: rgba(0, 0, 0, 0.06);
-    color: #1f1f1f;
-    border-left: 3px solid rgba(0, 0, 0, 0.6);
-  }
 
   width: 10px;
   /* vertical scroll for log */
