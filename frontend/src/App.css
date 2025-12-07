@@ -1,17 +1,7 @@
 .app {
-  display: flex;
-  height: 100vh;
   width: 100vw;
+  min-height: 100vh;
   background-color: #ffffff;
-}
-
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  background-color: #ffffff;
-  width: calc(100vw - 200px);
 }
 
 .page-header {
@@ -53,22 +43,6 @@
 }
 
 @media (max-width: 900px) {
-  .app {
-    flex-direction: column;
-    width: 100vw;
-  }
-
-  .sidebar {
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .main-content {
-    width: 100%;
-  }
-
   .page-header {
     padding: 30px 30px 20px 30px;
   }
@@ -80,19 +54,5 @@
   .filter-btn {
     padding: 6px 12px;
     font-size: 14px;
-  }
-
-  .file-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    padding: 30px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .file-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 35px;
-    padding: 35px 50px;
   }
 }

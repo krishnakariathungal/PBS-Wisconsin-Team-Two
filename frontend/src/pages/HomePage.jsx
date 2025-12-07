@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
+import HomeButton from "../components/HomeButton";
 
 export default function HomePage() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -46,6 +47,8 @@ export default function HomePage() {
 
   return (
     <div className="home-main">
+      <HomeButton/>
+
       {/* Heading */}
       <header className="heading-upload">
         <h1 className="heading-text">Upload</h1>

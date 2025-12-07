@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./EditPage.css";
+import HomeButton from "../components/HomeButton";
 
 export default function EditPage() {
   const location = useLocation();
@@ -808,6 +809,9 @@ export default function EditPage() {
 
   return (
     <div className="edit-page">
+
+      <HomeButton/>
+
       {/* Header with Audio Editor title */}
       <header className="edit-header">
         <h1 className="edit-title">Audio Editor</h1>
