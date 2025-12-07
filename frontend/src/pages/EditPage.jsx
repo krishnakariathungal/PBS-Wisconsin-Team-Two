@@ -1,6 +1,7 @@
 // pages/EditPage.jsx
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import jsPDF from "jspdf";
 import "./EditPage.css";
 import HomeButton from "../components/HomeButton";
 
@@ -807,10 +808,58 @@ export default function EditPage() {
     appendLogMessage(formatted, typeClass);
   };
 
+  const downloadLogAsPDF = () => {
+    const logBox = logBoxRef.current;
+    if (!logBox) return;
+
+    // Get all log entries
+    const logEntries = logBox.querySelectorAll('.log-entry');
+    const logText = Array.from(logEntries)
+      .map(entry => entry.textContent)
+      .join('\n');
+
+    // Create a new PDF document
+    const doc = new jsPDF();
+
+    // Set up the PDF with title and metadata
+    doc.setFontSize(16);
+    doc.text('Audio Analysis Report', 20, 15);
+
+    // Add file name
+    doc.setFontSize(11);
+    doc.text(`File: ${fileName}`, 20, 25);
+
+    // Add timestamp
+    const timestamp = new Date().toLocaleString();
+    doc.text(`Generated: ${timestamp}`, 20, 32);
+
+    // Add a separator line
+    doc.setDrawColor(200, 200, 200);
+    doc.line(20, 36, 190, 36);
+
+    // Add log content with word wrapping
+    doc.setFontSize(10);
+    const logLines = doc.splitTextToSize(logText, 170);
+    doc.text(logLines, 20, 42);
+
+    // Generate filename with month/day/year format
+    const date = new Date();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+
+    // Extract filename and filetype
+    const fileNameWithoutExtension = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+    const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1) || 'audio';
+
+    const pdfFileName = `audio_report_${fileNameWithoutExtension}_${fileExtension}_${month}_${day}_${year}.pdf`;
+    doc.save(pdfFileName);
+  };
+
   return (
     <div className="edit-page">
 
-      <HomeButton/>
+      <HomeButton />
 
       {/* Header with Audio Editor title */}
       <header className="edit-header">
@@ -855,6 +904,9 @@ export default function EditPage() {
         <audio ref={audioRef} src={audioUrl} />
         <button className="pause-button" onClick={togglePlayPause}>
           {isPlaying ? 'PAUSE' : 'PLAY'}
+        </button>
+        <button className="download-button" onClick={downloadLogAsPDF}>
+          DOWNLOAD LOG
         </button>
       </div>
     </div>
