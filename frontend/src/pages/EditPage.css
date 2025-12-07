@@ -1,7 +1,10 @@
 .edit-page {
-  display: flex;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #ffffff;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .edit-main {
@@ -69,16 +72,6 @@
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-/* pages/EditPage.css */
-.edit-page {
-  min-height: 100vh;
-  background-color: #ffffff;
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .edit-header {
@@ -380,4 +373,278 @@
     font-size: 18px;
     margin-left: 10px;
   }
+}
+
+/* Multiple files container styling */
+.files-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+  max-width: 100%;
+}
+
+.file-editor-wrapper {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.audio-file-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.remove-file-btn-editor {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  margin-left: auto;
+}
+
+.remove-file-btn-editor:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.file-name-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.file-name-header .file-name-text {
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+  word-break: break-word;
+}
+
+/* AudioFileEditor Component Styling */
+.audio-file-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.audio-file-editor .file-name-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 12px 0;
+  border-bottom: 1px solid #e7e5ff;
+  margin-bottom: 0;
+}
+
+.audio-file-editor .file-name-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #5d4b7f;
+  margin: 0;
+  word-break: break-word;
+}
+
+.audio-file-editor .waveform-section {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.audio-file-editor .waveform-layout {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.audio-file-editor .waveform-container {
+  background-color: #f4f1ff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid #e7e5ff;
+  flex: 2 1 0%;
+  min-width: 0;
+  max-width: calc(100% - 340px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.audio-file-editor .waveform-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+  height: 300px;
+  display: block;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+}
+
+.audio-file-editor .waveform-canvas {
+  width: auto;
+  height: 300px;
+  display: block;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.audio-file-editor .time-display {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #8b7ba8;
+  font-weight: 500;
+}
+
+.audio-file-editor .log-container {
+  flex: 0 0 320px;
+  background-color: #f4f1ff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid #e7e5ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: fit-content;
+}
+
+.audio-file-editor .log-container h3 {
+  margin: 0 0 8px 0;
+  color: #5d4b7f;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.audio-file-editor .log-box {
+  height: 300px;
+  overflow-y: auto;
+  background: rgba(180, 165, 214, 0.08);
+  padding: 12px;
+  border-radius: 10px;
+  color: #362b4e;
+  font-size: 13px;
+}
+
+.audio-file-editor .log-box .log-entry {
+  margin-bottom: 8px;
+  font-size: 13px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+}
+
+.audio-file-editor .log-box .log-entry.log-click {
+  background: rgba(0, 0, 0, 0.06);
+  color: #1f1f1f;
+  border-left: 3px solid rgba(0, 0, 0, 0.6);
+}
+
+.audio-file-editor .log-box .log-entry.log-static-click {
+  background: rgba(30, 144, 255, 0.06);
+  color: #1f3f8a;
+  border-left: 3px solid rgba(30, 144, 255, 0.6);
+}
+
+.audio-file-editor .log-box .log-entry.log-loud-click {
+  background: rgba(255, 20, 147, 0.06);
+  color: #7a1f4f;
+  border-left: 3px solid rgba(255, 20, 147, 0.6);
+}
+
+.audio-file-editor .log-box .log-entry.log-silence {
+  background: rgba(255, 0, 0, 0.06);
+  color: #7a1f1f;
+  border-left: 3px solid rgba(255, 0, 0, 0.4);
+}
+
+.audio-file-editor .log-box .log-entry.log-too-loud {
+  background: rgba(255, 165, 0, 0.06);
+  color: #7a4a1f;
+  border-left: 3px solid rgba(255, 165, 0, 0.6);
+}
+
+.audio-file-editor .log-box .log-entry.log-background-noise {
+  background: rgba(0, 255, 255, 0.06);
+  color: #0a3f43;
+  border-left: 3px solid rgba(0, 255, 255, 0.6);
+}
+
+.audio-file-editor .audio-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0;
+}
+
+.audio-file-editor .pause-button,
+.audio-file-editor .download-button {
+  padding: 18px 80px;
+  background-color: #b4a5d6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  font-family: 'Mulish', sans-serif;
+}
+
+.audio-file-editor .pause-button:hover,
+.audio-file-editor .download-button:hover {
+  background-color: #9d8bc4;
+  transform: translateY(-2px);
+}
+
+.audio-file-editor .download-button {
+  margin-left: 10px;
+}
+
+/* Scrollbar styling for AudioFileEditor */
+.audio-file-editor .waveform-scroll::-webkit-scrollbar,
+.audio-file-editor .log-box::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+.audio-file-editor .waveform-scroll::-webkit-scrollbar-track,
+.audio-file-editor .log-box::-webkit-scrollbar-track {
+  background: #e7e5ff;
+  border-radius: 10px;
+}
+
+.audio-file-editor .waveform-scroll::-webkit-scrollbar-thumb,
+.audio-file-editor .log-box::-webkit-scrollbar-thumb {
+  background-color: #9d8bc4;
+  border-radius: 10px;
+  border: 2px solid #e7e5ff;
+}
+
+.audio-file-editor .waveform-scroll::-webkit-scrollbar-thumb:hover,
+.audio-file-editor .log-box::-webkit-scrollbar-thumb:hover {
+  background-color: #7f6fb7;
+}
+
+.audio-file-editor .waveform-scroll,
+.audio-file-editor .log-box {
+  scrollbar-width: thin;
+  scrollbar-color: #9d8bc4 #e7e5ff;
 }

@@ -5,26 +5,32 @@ import "./HomePage.css";
 import HomeButton from "../components/HomeButton";
 
 export default function HomePage() {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
   const handleFileSelect = (event) => {
-    const file = event.target.files[0];
-    if (file && file.type.startsWith('audio/')) {
-      setSelectedFile(file);
-    } else {
-      alert('Please select an audio file');
+    const files = Array.from(event.target.files);
+    const audioFiles = files.filter(file => file.type.startsWith('audio/'));
+
+    if (audioFiles.length > 0) {
+      setSelectedFiles(prev => [...prev, ...audioFiles]);
+    }
+    if (audioFiles.length < files.length) {
+      alert('Only audio files are supported. Non-audio files were filtered out.');
     }
   };
 
   const handleDrop = (event) => {
     event.preventDefault();
-    const file = event.dataTransfer.files[0];
-    if (file && file.type.startsWith('audio/')) {
-      setSelectedFile(file);
-    } else {
-      alert('Please select an audio file');
+    const files = Array.from(event.dataTransfer.files);
+    const audioFiles = files.filter(file => file.type.startsWith('audio/'));
+
+    if (audioFiles.length > 0) {
+      setSelectedFiles(prev => [...prev, ...audioFiles]);
+    }
+    if (audioFiles.length < files.length) {
+      alert('Only audio files are supported. Non-audio files were filtered out.');
     }
   };
 
@@ -37,17 +43,25 @@ export default function HomePage() {
   };
 
   const handleUpload = () => {
-    if (selectedFile) {
-      // Navigate to editing page with the file
-      navigate('/edit', { state: { file: selectedFile } });
+    if (selectedFiles.length > 0) {
+      // Navigate to editing page with the files
+      navigate('/edit', { state: { files: selectedFiles } });
     } else {
-      alert('Please select a file first');
+      alert('Please select at least one audio file');
     }
+  };
+
+  const removeFile = (index) => {
+    setSelectedFiles(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const clearAllFiles = () => {
+    setSelectedFiles([]);
   };
 
   return (
     <div className="home-main">
-      <HomeButton/>
+      <HomeButton />
 
       {/* Heading */}
       <header className="heading-upload">
@@ -97,9 +111,35 @@ export default function HomePage() {
             </p>
           </div>
 
-          {selectedFile && (
-            <div className="selected-file">
-              <p>Selected: {selectedFile.name}</p>
+          {selectedFiles.length > 0 && (
+            <div className="selected-files">
+              <p className="selected-files-count">
+                {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''} selected
+              </p>
+              <ul className="selected-files-list">
+                {selectedFiles.map((file, index) => (
+                  <li key={index} className="selected-file-item">
+                    <span className="file-name">{file.name}</span>
+                    <button
+                      type="button"
+                      className="remove-file-btn"
+                      onClick={() => removeFile(index)}
+                      aria-label={`Remove ${file.name}`}
+                    >
+                      ✕
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              {selectedFiles.length > 0 && (
+                <button
+                  type="button"
+                  className="clear-all-btn"
+                  onClick={clearAllFiles}
+                >
+                  Clear All
+                </button>
+              )}
             </div>
           )}
         </div>
@@ -110,6 +150,7 @@ export default function HomePage() {
           accept="audio/*"
           onChange={handleFileSelect}
           style={{ display: 'none' }}
+          multiple
         />
       </section>
 
