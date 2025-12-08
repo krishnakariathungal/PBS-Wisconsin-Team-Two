@@ -184,6 +184,26 @@ export default function AudioFileEditor({ file, onRemove }) {
         };
     }, []);
 
+    useEffect(() => {
+        if (!audioBufferRef.current || !canvasRef.current) return;
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+
+        // Redraw the waveform with the playback indicator
+        drawWaveform(audioBufferRef.current, canvas, context);
+
+        // Draw the purple playback indicator
+        if (duration > 0) {
+            const progressX = (currentTime / duration) * canvas.width;
+            context.strokeStyle = '#9370db';
+            context.lineWidth = 3;
+            context.beginPath();
+            context.moveTo(progressX, 0);
+            context.lineTo(progressX, canvas.height);
+            context.stroke();
+        }
+    }, [currentTime]);
+
     const drawWaveform = (audioBuffer, canvas, context) => {
         const data = audioBuffer.getChannelData(0);
         const step = Math.ceil(data.length / canvas.width);
